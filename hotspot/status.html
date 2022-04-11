@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	$(if refresh-timeout)
+	<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+	$(endif)
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="expires" content="-1">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+	<title>Mikrotik Hotspot by Fikri</title>
+	<link rel="stylesheet" type="text/css" href="style/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/custom-style.css">
+
+	<script src="style/bs/js/bootstrap.min.js"></script>
+	
+	<script language="JavaScript">
+	<!--
+	$(if advert-pending == 'yes')
+	    var popup = '';
+	    function focusAdvert() {
+		if (window.focus) popup.focus();
+	    }
+	    function openAdvert() {
+		popup = open('$(link-advert)', 'hotspot_advert', '');
+		setTimeout("focusAdvert()", 1000);
+	    }
+	$(endif)
+	    function openLogout() {
+		if (window.name != 'hotspot_status') return true;
+	        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+		window.close();
+		return false;
+	    }
+	//-->
+	</script>
+</head>
+<body style="font-family: Comfortaa" 
+$(if advert-pending == 'yes')
+	onLoad="openAdvert()"
+$(endif)>
+
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    	 <img src="img/mikrotik.svg" height="18" class="d-inline-block align-text-top">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact Admin</a>
+        </li>        
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="logout.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>	
+<!-- navbar end -->
+
+
+<div class="container">
+	<div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3" style="margin-top: 5%">
+		<form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+			<div class="card border-dark">
+				<div class="card-header pt-3">
+					<h5>Hotstpot User Status</h5>
+				</div>
+				<div class="card-body">
+					<table class="table mt-3">
+
+						$(if login-by == 'trial')
+							<tr>
+								<td>Hotspot User</td>
+								<td>:</td>
+								<td>Trial User</td>
+							</tr>
+						$(elif login-by != 'mac')
+							<tr>
+								<td>Hotspot User</td>
+								<td>:</td>
+								<td>$(username)</td>
+							</tr>
+						$(endif)
+						<tr>
+							<td>IP Address</td>
+							<td>:</td>
+							<td>$(ip)</td>
+						</tr>
+						<tr>
+							<td>Data Usage</td>
+							<td>:</td>
+							<td>$(bytes-in-nice) Up<br>$(bytes-out-nice) Down</td>
+						</tr>
+						$(if session-time-left)
+							<tr>
+								<td>Connected</td>
+								<td>:</td>
+								<td>$(uptime) <br>( $(session-time-left) left)</td>
+							</tr>
+						$(else)
+							<tr>
+								<td>Connected</td>
+								<td>:</td>
+								<td>$(uptime)</td>
+							</tr>
+						$(endif)
+
+						$(if blocked == 'yes')
+							<tr>
+								<td>Status</td>
+								<td>:</td>
+								<td><a href="$(link-advert)" target="hotspot_advert">Advertisement</a> required</td>
+							</tr>
+						$(elif refresh-timeout)
+							<tr>
+								<td>Refresh Interval</td>
+								<td>:</td>
+								<td>$(refresh-timeout)</td>
+							</tr>
+						$(endif)
+					</table>
+
+					$(if login-by-mac != 'yes')
+					
+					<!-- user manager link. if user manager resides on other router, replace $(hostname) by its address
+					<button onclick="document.location='http://$(hostname)/user?subs='; return false;">status</button>
+					<!-- end of user manager link -->
+					<input class="btn btn-danger" type="submit" value="Logout">
+					$(endif)
+				</div>
+				<div class="card-footer">
+					<small>Powered by <strong>MikroTik RouterOS</strong></small>
+				</div>
+			</div>
+		</form>
+		<br>
+		<div class="text-center">
+			<small class="text-muted center">Copyright &copy; 2022 Fikri Miftah A. <br>All Rights Reserved</small>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

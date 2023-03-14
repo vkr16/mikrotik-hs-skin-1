@@ -1,8 +1,12 @@
-# mikrotik-hs-skin-1
+# Mikrotik Hotspot Login #1
 Simple mikrotik hotspot login page skin with bootstrap
 
-Just upload it to your mikrotik and enjoy my simple design, i think it's a little bit better than mikrotik stock hotspot login page on RouterOS 6 and below,
-You can add some changes or customization if you want to.
+<img src="https://img.shields.io/static/v1?label=Mikrotik&message=RouterOS%206&color=blue&style=flat-square"></img>
+<img src="https://img.shields.io/static/v1?label=Bootstrap&message=v5.1.3&color=blueviolet&style=flat-square"></img>
+
+# How to use
+Just upload it to the mikrotik files replacing the mikrotik stock hotspot login page on RouterOS 6 and below,
+You can add some changes or customization by edit the html files if you want to.
 
 # Here is some screenshots
 
